@@ -9,7 +9,7 @@
 #include <global.h>
 #include <mcp2515.h>
 #include <defaults.h>
-#include <PCanbus.h>
+#include <NewCanbusbus.h>
 
 // Default filter -- all open
 const prog_uint8_t all_open_filters[] PROGMEM = 
@@ -29,17 +29,17 @@ const prog_uint8_t all_open_filters[] PROGMEM =
 };
 
 /* C++ wrapper */
-PCanbusClass::PCanbusClass() {
+NewCanbusbusClass::NewCanbusbusClass() {
 }
 
-void PCanbusClass::set_filters(const prog_uint8_t *filter) {
+void NewCanbusbusClass::set_filters(const prog_uint8_t *filter) {
   mcp2515_static_filter(filter);
 }
 
 //
 // Get the full message, including id and data
 //
-char PCanbusClass::message_rx(tCAN *message) {
+char NewCanbusbusClass::message_rx(tCAN *message) {
 	if (mcp2515_read_status(SPI_RX_STATUS)) {
     uint8_t result = mcp2515_get_message(message);
     if (result) {
@@ -49,7 +49,7 @@ char PCanbusClass::message_rx(tCAN *message) {
   return 0;
 }
 
-char PCanbusClass::message_rx(unsigned char *buffer) {
+char NewCanbusbusClass::message_rx(unsigned char *buffer) {
   tCAN message;
 
   if (mcp2515_check_message()) {
@@ -69,7 +69,7 @@ char PCanbusClass::message_rx(unsigned char *buffer) {
 
 }
 
-char PCanbusClass::message_tx(uint16_t id, uint8_t data[]) {
+char NewCanbusbusClass::message_tx(uint16_t id, uint8_t data[]) {
 	tCAN message;
 
   // May be a few defaults here that should be parameterized?
@@ -92,8 +92,8 @@ char PCanbusClass::message_tx(uint16_t id, uint8_t data[]) {
 	return 0;
 }
 
-char PCanbusClass::init(unsigned char speed) {
+char NewCanbusbusClass::init(unsigned char speed) {
   return mcp2515_init(speed);
 }
 
-PCanbusClass PCanbus;
+NewCanbusbusClass NewCanbusbus;

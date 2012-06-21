@@ -5,8 +5,8 @@
  */
 #include <mcp2515.h>
 
-#ifndef canbus__h
-#define canbus__h
+#ifndef newcanbus__h
+#define newcanbus__h
 
 #define CANSPEED_125 	  7		// CAN speed at 125 kbps
 #define CANSPEED_250  	3		// CAN speed at 250 kbps
@@ -28,11 +28,11 @@
 #define PID_REQUEST         0x7DF
 #define PID_REPLY			      0x7E8
 
-class PCanbusClass
+class NewCanbusClass
 {
   public:
 
-	PCanbusClass();
+	NewCanbusClass();
   char init(unsigned char);
 	char message_tx(uint16_t id, uint8_t data[]);
 	char message_rx(unsigned char *buffer);
@@ -44,7 +44,7 @@ class PCanbusClass
 	
 };
 
-extern PCanbusClass PCanbus;
+extern NewCanbusClass NewCanbus;
 // extern tCAN message;
 
 #endif
