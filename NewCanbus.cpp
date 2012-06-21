@@ -2,7 +2,6 @@
 #include <Arduino.h>
 #include <stdio.h>
 #include <avr/io.h>
-#include <avr/interrupt.h>
 #include <util/delay.h>
 #include <pins_arduino.h>
 #include <inttypes.h>
